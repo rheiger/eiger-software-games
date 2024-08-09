@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: var(--primary-color);
+  font-size: 1.25em;
+  margin-bottom: 5px;
+  margin-top: 0;
+}
+
+.controls {
+  margin-bottom: 20px;
+}
+
+#game-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  height: 220px;
+  position: relative;
+}
+
+.tower {
+    width: 20px; /* Match TOWER_WIDTH */
+    height: 200px; /* Match TOWER_HEIGHT */
+    background-color: #666; /* To make it visible */
+    position: relative; /* absolute */
+    top: 20px;
+}
+
+.tower::before {
+    bottom: 0;
+}
+
+.disc {
+  width: 100%;
+  max-width: 200px;
+  height: 30px;
+  margin: 2px 0;
+  border-radius: 15px;
+  background-color: var(--tile-color);
+  position: absolute;
+}
+
+#moveCounter, #timer {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+#message {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--secondary-color);
+  margin-top: 20px;
+}
+
+button {
+  font-size: 16px;
+  padding: 10px 20px;
+  margin: 10px;
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--highlight-color);
+}
+
+select {
+  font-size: 16px;
+  margin-right: 10px;
+  padding: 5px;
+}
+
+@media (max-width: 600px) {
+  #game-board {
+      flex-direction: column;
+  }
+
+  .tower {
+      margin: 20px 0;
+  }
+
+  .disc {
+      max-width: 150px;
+      height: 20px;
+  }
+}
