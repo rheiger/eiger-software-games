@@ -25,8 +25,15 @@
         </div>
         <div id="controls">
             <button id="startStop" data-i18n="start">Start</button>
-            <button id="clear" data-i18n="clear">Clear</button>
-            <button id="random" data-i18n="random">Random</button>
+            <select id="patternSelect">
+                <option value="keep" data-i18n="keep" selected></option>
+                <option value="clear" data-i18n="clear"></option>
+                <option value="random" data-i18n="random"></option>
+                <option value="stillLife" data-i18n="stillLife"></option>
+                <option value="oscillator" data-i18n="oscillator"></option>
+                <option value="spaceship" data-i18n="spaceship"></option>
+                <option value="infinite" data-i18n="infinite"></option>
+            </select>
             <button id="explain" data-i18n="explain">Explain</button>
         </div>
         <div id="explanation" class="explanation-overlay">

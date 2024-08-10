@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="./game.css">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -18,7 +18,9 @@
 <body>
     <div class="container">
         <h1 id="title" data-i18n="title">15 Puzzle Challenge</h1>
-        <div id="gameBoard"></div>
+        <div class="game-wrapper">
+            <div id="gameBoard"></div>
+        </div>
         <div class="controls">
             <select id="puzzleType">
                 <option value="8">8 Puzzle (3x3)</option>

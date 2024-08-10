@@ -2,13 +2,13 @@ const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
 
 const patterns = {
-    stillLifes: [
+    stillLife: [
         { name: "Block", pattern: [[1, 1], [1, 2], [2, 1], [2, 2]] },
         { name: "Beehive", pattern: [[1, 2], [1, 3], [2, 1], [2, 4], [3, 2], [3, 3]] },
         { name: "Loaf", pattern: [[1, 2], [1, 3], [2, 1], [2, 4], [3, 2], [3, 4], [4, 3]] },
         { name: "Boat", pattern: [[1, 1], [1, 2], [2, 1], [2, 3], [3, 2]] }
     ],
-    oscillators: [
+    oscillator: [
         { name: "Blinker", pattern: [[1, 1], [1, 2], [1, 3]] },
         { name: "Toad", pattern: [[1, 2], [1, 3], [1, 4], [2, 1], [2, 2], [2, 3]] },
         { name: "Beacon", pattern: [[1, 1], [1, 2], [2, 1], [2, 2], [3, 3], [3, 4], [4, 3], [4, 4]] },
@@ -27,7 +27,7 @@ const patterns = {
             ]
         }
     ],
-    spaceships: [
+    spaceship: [
         { name: "Glider", pattern: [[1, 2], [2, 3], [3, 1], [3, 2], [3, 3]] },
         { name: "Lightweight spaceship", pattern: [[1, 1], [1, 4], [2, 5], [3, 1], [3, 5], [4, 2], [4, 3], [4, 4], [4, 5]] },
         { name: "Middleweight spaceship", pattern: [[1, 1], [1, 5], [2, 6], [3, 1], [3, 6], [4, 2], [4, 3], [4, 4], [4, 5], [4, 6], [5, 3], [5, 4], [5, 5], [5, 6]] },
@@ -69,9 +69,9 @@ function initializeGrid() {
         - gameContainer.offsetTop
         - controls.offsetHeight
         - generationCounter.offsetHeight
-        - 40; // Additional margin
+        - 140; // Additional margin
 
-    const availableWidth = window.innerWidth - 40; // 20px margin on each side
+    const availableWidth = window.innerWidth - 50; // 20px margin on each side
 
     // Use the smaller of the two to ensure it fits on screen
     const maxSize = Math.min(availableHeight, availableWidth);
@@ -313,6 +313,12 @@ function hideExplanation() {
 }
 
 function randomizeGrid(patternType = 'random') {
+    if (patternType === 'clear') {
+        clearGrid();
+        return;
+    } else if (patternType === 'keep') {
+        return;
+    }
     clearGrid();
 
     if (patternType === 'random') {
@@ -337,38 +343,25 @@ function randomizeGrid(patternType = 'random') {
     drawGrid();
 }
 
-function showPatternSelection() {
-    const selection = prompt(
-        `${translations[currentLanguage].choosePattern}
-  1: ${translations[currentLanguage].randomPattern}
-  2: ${translations[currentLanguage].stillLife}
-  3: ${translations[currentLanguage].oscillator}
-  4: ${translations[currentLanguage].spaceship}
-  5: ${translations[currentLanguage].infinite}`
-    );
-
-    switch (selection) {
-        case "1":
-            randomizeGrid('random');
-            break;
-        case "2":
-            randomizeGrid('stillLifes');
-            break;
-        case "3":
-            randomizeGrid('oscillators');
-            break;
-        case "4":
-            randomizeGrid('spaceships');
-            break;
-        case "5":
-            randomizeGrid('infinite');
-            break;
-        default:
-            alert(translations[currentLanguage].invalidSelection);
-            randomizeGrid('random');
+function handlePatternSelection(event) {
+    const patternType = event.target.value;
+    if (patternType === 'keep') {
+        return; // Do nothing, keep the current grid
+    } else if (patternType === 'clear') {
+        clearGrid();
+    } else {
+        randomizeGrid(patternType);
     }
 }
 
+const patternSelect = document.getElementById('patternSelect');
+patternSelect.addEventListener('change', handlePatternSelection);
+patternSelect.addEventListener('input', handlePatternSelection);
+patternSelect.addEventListener('blur', handlePatternSelection);
+patternSelect.addEventListener('touchstart', function() {
+    setTimeout(handlePatternSelection, 100);
+  });
+  
 
 window.addEventListener('resize', () => {
     initializeGrid();
@@ -376,13 +369,11 @@ window.addEventListener('resize', () => {
 });
 
 document.getElementById('startStop').addEventListener('click', startStop);
-document.getElementById('clear').addEventListener('click', clearGrid);
-document.getElementById('random').addEventListener('click', showPatternSelection);
-// document.getElementById('random').addEventListener('click', randomizeGrid);
 document.getElementById('explain').addEventListener('click', function(event) {
     event.stopPropagation(); // Prevent this click from immediately hiding the explanation
     showExplanation();
-});// canvas.addEventListener('click', handleCanvasClick);
+});
+
 canvas.addEventListener('mousedown', handleMouseDown);
 canvas.addEventListener('mousemove', handleMouseMove);
 canvas.addEventListener('mouseup', handleMouseUp);
@@ -393,18 +384,12 @@ canvas.addEventListener('touchend', handleTouchEnd);
 document.addEventListener('click', hideExplanation);
 document.addEventListener('touchstart', hideExplanation);
 
-// Prevent clicks within the explanation from closing it
-// document.getElementById('explanation').addEventListener('click', function(event) {
-//     event.stopPropagation();
-// });
-
 function initGame() {
     currentLanguage = detectLanguage();
     setLanguage(currentLanguage);
     initializeGrid();
     clearGrid();
     drawGrid();
-    showExplanation(); // Show explanation on game init
 }
 
 document.addEventListener('DOMContentLoaded', initGame);
