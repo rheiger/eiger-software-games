@@ -1,0 +1,67 @@
+<context>
+# Overview  
+This project is a collection of classic and modern puzzle and strategy games, designed for web and mobile browsers. The goal is to reverse engineer, document, and migrate each game component to ensure maintainability, reusability, and ease of onboarding for new developers. The collection is valuable for users seeking brain-challenging entertainment and for developers as a reference for game architecture and internationalization.
+
+# Core Features  
+- **Sudoku**: Classic number puzzle game.  
+- **Connect Four**: Two-player connection game.  
+- **Mastermind**: Code-breaking logic game.  
+- **15 Puzzle (Sliding Puzzle)**: Tile-based sliding puzzle.  
+- **Towers of Hanoi**: Mathematical puzzle with disks and pegs.  
+- **Squash**: Arcade-style paddle and ball game.  
+- **Breakout**: Brick-breaking arcade game.  
+- **Conway's Game of Life**: Cellular automaton simulation.
+
+Each game includes:
+- HTML, CSS, and JS files for UI and logic
+- Service worker for PWA/offline support
+- Manifest and icons for installability
+- Translations for multi-language support
+
+# User Experience  
+- Users can select and play any game from a unified entry page.
+- Each game is installable as a PWA and supports multiple languages.
+- UI is consistent across games, with shared styles and language selectors.
+- Target users: puzzle enthusiasts, casual gamers, and developers interested in game implementations.
+</context>
+<PRD>
+# Technical Architecture  
+- Each game is a self-contained folder with index.html, game.js, game.css, translations.js, manifest.json, icons, and service-worker.js.
+- Shared resources: css/common.css, js/common.js, translations.js (root).
+- Internationalization via translations.js in each game and root.
+- PWA support via manifest and service worker in each game.
+- Entry point: index.html in project root, linking to each game.
+
+# Development Roadmap  
+- **Phase 1: Reverse Engineering**
+  - Analyze each game's code structure and dependencies.
+  - Document the architecture, main modules, and shared utilities.
+- **Phase 2: Migration Preparation**
+  - Identify opportunities for code reuse and modularization.
+  - Plan for extracting common logic (e.g., language selection, PWA setup).
+- **Phase 3: Documentation**
+  - Generate base documentation for each game (overview, rules, controls, architecture).
+  - Document shared resources and project structure.
+- **Phase 4: Task Generation**
+  - Use Task Master AI to generate actionable tasks for migration, refactoring, and documentation improvements.
+
+# Logical Dependency Chain
+- Start with shared resources (common.js, common.css, root translations.js).
+- Reverse engineer and document each game individually.
+- Migrate shared logic and refactor games to use common modules where possible.
+- Document and refactor each game in turn.
+- Finalize with project-wide documentation and onboarding guide.
+
+# Risks and Mitigations  
+- **Risk:** Inconsistent code patterns across games.  
+  **Mitigation:** Standardize documentation and refactoring tasks.
+- **Risk:** Loss of functionality during migration.  
+  **Mitigation:** Incremental migration and testing after each step.
+- **Risk:** Incomplete internationalization.  
+  **Mitigation:** Audit and unify translation files.
+
+# Appendix  
+- See each game's folder for original code and assets.
+- Refer to root index.html for entry point and navigation logic.
+- Shared resources: css/common.css, js/common.js, translations.js.
+</PRD>
